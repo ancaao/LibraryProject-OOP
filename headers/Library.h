@@ -7,12 +7,21 @@
 
 #include "Book.h"
 #include "Client.h"
+#include "SortStrategy.h"
 #include <algorithm>
 
+template <typename T>
+class Library;
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const Library<T>& library);
+
+template <typename T>
 class Library{
-    std::string name;
+    T name;
     std::vector<Book> books;
     std::vector<std::shared_ptr<Client>> clients;
+    std::unique_ptr<SortStrategy> strategy;
 public:
     Library() = default;
     ~Library() = default;
@@ -73,12 +82,14 @@ public:
 
     void get_details(Client* client);
 
+    void set_sort_strategy(std::unique_ptr<SortStrategy> &&strategy);
+
     double get_total_sales();
 
     std::vector<Book> filter_by_genre(Genre genre) const;
 
-    Library(const std::string& name_, const std::vector<Book>& books_);
+    Library(const T& name_, const std::vector<Book>& books_);
 
-    friend std::ostream& operator<<(std::ostream& os, const Library& library);
+    friend std::ostream& operator<< <>(std::ostream& os, const Library<T>& library);
 };
 #endif //MAIN_CPP_LIBRARY_H

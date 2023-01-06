@@ -44,7 +44,7 @@ endif()
 add_executable(${PROJECT_NAME} main.cpp src/Author.cpp headers/Author.h src/AuthorException.cpp headers/AuthorException.h src/Book.cpp headers/Book.h
         src/BookException.cpp headers/BookException.h src/Client.cpp headers/Client.h src/Library.cpp headers/Library.h
         src/NGO.cpp headers/NGO.h src/Publisher.cpp headers/Publisher.h src/Regular.cpp headers/Regular.h
-        src/Retiree.cpp headers/Retiree.h src/Student.cpp headers/Student.h)
+        src/Retiree.cpp headers/Retiree.h src/Student.cpp headers/Student.h src/BookBuilder.cpp headers/BookBuilder.h src/SortByTitle.cpp headers/SortByTitle.h src/SortStrategy.cpp headers/SortStrategy.h)
 
 ############### ################################################################
 

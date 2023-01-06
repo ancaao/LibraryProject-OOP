@@ -1,6 +1,8 @@
 #include<fstream>
 #include<map>
 #include<string>
+#include "headers/SortByTitle.h"
+#include "headers/BookBuilder.h"
 #include "headers/Author.h"
 #include "headers/Publisher.h"
 #include "headers/Book.h"
@@ -77,6 +79,7 @@ void read_book(std::ifstream &fbook, std::vector<Book> &books, std::vector<Autho
     if (!fbook.is_open()) std::cerr << "Error in opening the file" << std::endl;
     else{
         while(fbook.good()){
+            BookBuilder builder;
             std::string title, author_name, publisher_name;
             std::map<std::string, Genre> pairs = { {"Fiction" , Genre::Fiction} , {"Nonfiction" , Genre::Nonfiction}, {"Drama" , Genre::Drama}, {"Folktale" , Genre::Folktale}, {"Poetry" , Genre::Poetry} };
             double price;
@@ -106,16 +109,8 @@ void read_book(std::ifstream &fbook, std::vector<Book> &books, std::vector<Autho
 
             auto publisher = *std::find_if(publisher_list.begin(), publisher_list.end(), [publisher_name](auto publisher)
             { return publisher_name == publisher.getName(); });
-
-            books.push_back(
-                    Book(title,
-                         author,
-                         publisher,
-                         price,
-                         genre,
-                         year
-                    )
-            );
+            builder.addTitle(title).addAuthor(author).addYear(year).addPublisher(publisher).addPrice(price).addGenre(genre);
+            books.push_back(builder.build());
         }
     }
 
@@ -135,7 +130,7 @@ int main() {
     read_Publisher(fpublisher, publishers, authors);
     read_book(fbook, books, authors, publishers);
 
-    Library carturesti("Carturesti", books);
+    Library<std::string> carturesti("Carturesti", books);
 
     Regular normal("Mihai");
     normal.add_to_cart(*carturesti.find("Ion"));
@@ -173,6 +168,11 @@ int main() {
     std::cout << "Cartile gasite din genul cautat sunt: " << std::endl;
     std::vector<Book> Fiction_books = carturesti.filter_by_genre(Genre::Fiction);
     for (const Book& book: Fiction_books) std::cout << book <<"\n";
+
+    carturesti.set_sort_strategy(std::make_unique<SortByTitle>());
+
+    std::cout << "Toate cartile disponibile sunt: " << std::endl;
+    std::cout << carturesti;
 
     return 0;
 }

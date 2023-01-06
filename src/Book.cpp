@@ -39,3 +39,31 @@ std::ostream& operator<<(std::ostream& os, const Book& book) {
 const Author &Book::getAuthor() const {
     return author;
 }
+
+int Book::getYear() const {
+    return year;
+}
+
+void Book::setTitle(const std::string &title_) {
+    Book::title = title_;
+}
+
+void Book::setAuthor(const Author &author_) {
+    Book::author = author_;
+}
+
+void Book::setPublisher(const Publisher &publisher_) {
+    Book::publisher = publisher_;
+}
+
+void Book::setPrice(double price_) {
+    Book::price = price_;
+}
+
+void Book::setGenre(Genre genre_) {
+    Book::genre = genre_;
+}
+
+void Book::setYear(int year_) {
+    Book::year = year_;
+}

@@ -6,11 +6,18 @@
 #include "../headers/NGO.h"
 #include "../headers/Retiree.h"
 
-void Library::add_client(const Client& client){
+template <typename T>
+void Library<T>::add_client(const Client& client){
     clients.push_back(client.clone());
 }
 
-std::vector<Book> Library::filter_by_genre(Genre genre) const {
+template <typename T>
+void Library<T>::set_sort_strategy(std::unique_ptr<SortStrategy> &&strategy_) {
+    strategy = std::move(strategy_);
+}
+
+template <typename T>
+std::vector<Book> Library<T>::filter_by_genre(Genre genre) const {
     std::vector<Book> new_books;
     auto genre_match_fn = [genre](auto book) {
         return book.getGenre() == genre;
@@ -19,14 +26,24 @@ std::vector<Book> Library::filter_by_genre(Genre genre) const {
     return new_books;
 }
 
-std::ostream& operator<<(std::ostream& os, const Library& library) {
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const Library<T>& library) {
     os << "Library - " << "Name: " << library.name  << "\n";
-    for(const auto& book : library.books)
-        os << "Book - " << book << "\n";
+
+    if (library.strategy) {
+        std::vector<Book> sorted_books = library.strategy->sort(library.books);
+        for(const auto& book : sorted_books)
+            os << "Book - " << book << "\n";
+    } else {
+        for(const auto& book : library.books)
+            os << "Book - " << book << "\n";
+    }
+
     return os;
 }
 
-void Library::get_details(Client* client){
+template <typename T>
+void Library<T>::get_details(Client* client){
     if(auto* student = dynamic_cast <Student*>(client)) {
         std::cout << "Clientul " << student->getName() << " are reducere 20% la cartile de la editura Nemira" << std::endl;
     } else if(auto* ngo = dynamic_cast <NGO*>(client)) {
@@ -40,7 +57,8 @@ void Library::get_details(Client* client){
     std::cout<< "Valoare cumparaturilor este in valoare de " << client->get_total() << std::endl;
 }
 
-double Library::get_total_sales() {
+template <typename T>
+double Library<T>::get_total_sales() {
     double sum = 0.0;
     for (auto &client : clients) {
         sum += client->get_total();
@@ -49,4 +67,9 @@ double Library::get_total_sales() {
     return sum;
 }
 
-Library::Library(const std::string& name_, const std::vector<Book>& books_) : name{name_}, books{books_} {}
+template <typename T>
+Library<T>::Library(const T& name_, const std::vector<Book>& books_) : name{name_}, books{books_} {}
+
+template class Library<std::string>;
+
+template std::ostream& operator<< <>(std::ostream& os, const Library<std::string>& library);
