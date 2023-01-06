@@ -40,9 +40,9 @@ const Author &Book::getAuthor() const {
     return author;
 }
 
-int Book::getYear() const {
+/*int Book::getYear() const {
     return year;
-}
+}*/
 
 void Book::setTitle(const std::string &title_) {
     Book::title = title_;
