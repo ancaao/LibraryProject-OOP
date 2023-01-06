@@ -14,8 +14,8 @@ private:
 public:
     BookBuilder();
     BookBuilder& addTitle(const std::string& title);
-    BookBuilder& addAuthor(const Author author);
-    BookBuilder& addPublisher(const Publisher publisher);
+    BookBuilder& addAuthor(const Author &author);
+    BookBuilder& addPublisher(const Publisher &publisher);
     BookBuilder& addPrice(const double price);
     BookBuilder& addGenre(const Genre genre);
     BookBuilder& addYear(const int year);

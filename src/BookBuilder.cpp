@@ -9,7 +9,7 @@ BookBuilder& BookBuilder::addTitle(const std::string &title) {
     book.setTitle(title);
     return *this;
 }
-BookBuilder& BookBuilder::addAuthor(const Author author) {
+BookBuilder& BookBuilder::addAuthor(const Author &author) {
     book.setAuthor(author);
     return *this;
 }
@@ -17,7 +17,7 @@ BookBuilder& BookBuilder::addPrice(const double price) {
     book.setPrice(price);
     return *this;
 }
-BookBuilder& BookBuilder::addPublisher(const Publisher publisher) {
+BookBuilder& BookBuilder::addPublisher(const Publisher &publisher) {
     book.setPublisher(publisher);
     return *this;
 }
