@@ -1,10 +1,10 @@
 //
 // Created by Anca on 11/27/2022.
 //
-#include "../headers/Library.h"
-#include "../headers/Student.h"
-#include "../headers/NGO.h"
-#include "../headers/Retiree.h"
+#include <Library.h>
+#include <Student.h>
+#include <NGO.h>
+#include <Retiree.h>
 
 template <typename T>
 void Library<T>::add_client(const Client& client){
@@ -58,7 +58,7 @@ void Library<T>::get_details(Client* client){
 }
 
 template <typename T>
-double Library<T>::get_total_sales() {
+double Library<T>::get_total_sales() const {
     double sum = 0.0;
     for (auto &client : clients) {
         sum += client->get_total();

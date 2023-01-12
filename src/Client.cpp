@@ -1,7 +1,7 @@
 //
 // Created by Anca on 12/9/2022.
 //
-#include "../headers/Client.h"
+#include <Client.h>
 #include<numeric>
 
 Client::Client(const std::string& name_) : name{name_} {}

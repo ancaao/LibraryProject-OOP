@@ -1,23 +1,12 @@
 //
 // Created by Anca on 12/9/2022.
 //
-#include "../headers/Student.h"
+#include <Student.h>
 #include <numeric>
 
 Student :: Student(const std::string& name) : Client{name} {}
 
 std::shared_ptr<Client> Student::clone() const { return std::make_shared<Student>(*this); }
-
-Student& Student::operator=(Student other) {
-    swap(*this, other);
-    return *this;
-}
-
-void swap(Student& student1, Student& student2) {
-    using std::swap;
-    swap(student1.name, student2.name);
-    swap(student1.books, student2.books);
-}
 
 double Student::get_total()  {
     auto sum = [](const double& accumulator, const Book& book){

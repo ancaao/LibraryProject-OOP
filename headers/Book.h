@@ -7,8 +7,8 @@
 
 #include<iostream>
 #include<ctime>
-#include "Publisher.h"
-#include "BookException.h"
+#include <Publisher.h>
+#include <AppException.h>
 
 enum class Genre{MIN, Fiction, Nonfiction, Drama, Poetry, Folktale, MAX};
 
@@ -29,7 +29,7 @@ public:
     Genre getGenre() const;
     double getPrice() const;
     Publisher getPublisher() const;
-    int getYear() const;
+//    int getYear() const;
 
     void setTitle(const std::string &title_);
     void setAuthor(const Author &author_);

@@ -1,18 +1,17 @@
 #include<fstream>
 #include<map>
 #include<string>
-#include "headers/SortByTitle.h"
-#include "headers/BookBuilder.h"
-#include "headers/Author.h"
-#include "headers/Publisher.h"
-#include "headers/Book.h"
-#include "headers/Library.h"
-#include "headers/Student.h"
-#include "headers/NGO.h"
-#include "headers/Retiree.h"
-#include "headers/AuthorException.h"
-#include "headers/BookException.h"
-#include "headers/Regular.h"
+#include<SortByTitle.h>
+#include<BookBuilder.h>
+#include<Author.h>
+#include<Publisher.h>
+#include<Book.h>
+#include<Library.h>
+#include<Student.h>
+#include<NGO.h>
+#include<Retiree.h>
+#include<AppException.h>
+#include<Regular.h>
 
 
 void read_Author(std::ifstream &fauthor, std::vector<Author> &authors){
@@ -22,14 +21,14 @@ void read_Author(std::ifstream &fauthor, std::vector<Author> &authors){
     else{
         while(fauthor.good()){
             std::string name, gender, nationality;
-            std::getline(fauthor, name, ',');
-            std::getline(fauthor, gender, ',');
+            std::getline(fauthor, name, '|');
+            std::getline(fauthor, gender, '|');
             std::getline(fauthor, nationality, '\n');
             if(fauthor.eof()) break;
 
             try{
                 authors.emplace_back(name, gender, nationality);
-            } catch (AuthorException &error) {
+            } catch (AppException &error) {
                 std::cout << error.what() << '\n';
             }
         }
@@ -47,15 +46,15 @@ void read_Publisher(std::ifstream &fpublisher, std::vector<Publisher> &publisher
             std::string name, author_name, buffer;
             int authors_count;
             std::vector <std::string> author_names;
-            std::getline(fpublisher, name, ',');
+            std::getline(fpublisher, name, '|');
 //        std::cout << "name: " << name << std::endl;
-            std::getline(fpublisher, buffer, ',');
+            std::getline(fpublisher, buffer, '|');
 //        std::cout << "nr: " << buffer << std::endl;
             authors_count = std::stoi(buffer);
 
             while(authors_count) {
                 if (authors_count != 1) {
-                    std::getline(fpublisher, author_name, ',');
+                    std::getline(fpublisher, author_name, '|');
                 } else {
                     std::getline(fpublisher, author_name, '\n');
                 }
@@ -85,21 +84,21 @@ void read_book(std::ifstream &fbook, std::vector<Book> &books, std::vector<Autho
             double price;
             Genre genre;
             int year;
-            std::getline(fbook, title, ',');
-            std::getline(fbook, author_name, ',');
-            std::getline(fbook, publisher_name, ',');
+            std::getline(fbook, title, '|');
+            std::getline(fbook, author_name, '|');
+            std::getline(fbook, publisher_name, '|');
 
             std::string aux;
-            std::getline(fbook, aux, ',');
+            std::getline(fbook, aux, '|');
 
             price = std::stod(aux);
 
             try{
-                std::getline(fbook, aux, ',');
+                std::getline(fbook, aux, '|');
                 genre = pairs.at(aux);
             }catch(const std::out_of_range& e){
-                (void)e;
-                throw WrongGender();
+                (void) e;
+                throw WrongGenre();
             }
 
             std::getline(fbook, aux, '\n');
@@ -109,6 +108,13 @@ void read_book(std::ifstream &fbook, std::vector<Book> &books, std::vector<Autho
 
             auto publisher = *std::find_if(publisher_list.begin(), publisher_list.end(), [publisher_name](auto publisher)
             { return publisher_name == publisher.getName(); });
+
+            try{
+                Book book(title, author, publisher, price, genre, year);
+            } catch (AppException &error) {
+                std::cout << error.what() << '\n';
+            }
+
             builder.addTitle(title).addAuthor(author).addYear(year).addPublisher(publisher).addPrice(price).addGenre(genre);
             books.push_back(builder.build());
         }

@@ -1,23 +1,12 @@
 //
 // Created by Anca on 12/10/2022.
 //
-#include "../headers/Retiree.h"
+#include <Retiree.h>
 #include <numeric>
 
 Retiree :: Retiree(const std::string& name) : Client{name} {}
 
 std::shared_ptr<Client> Retiree::clone() const { return std::make_shared<Retiree>(*this); }
-
-Retiree& Retiree::operator=(Retiree other) {
-    swap(*this, other);
-    return *this;
-}
-
-void swap(Retiree& retiree1, Retiree& retiree2) {
-    using std::swap;
-    swap(retiree1.name, retiree2.name);
-    swap(retiree1.books, retiree2.books);
-}
 
 double Retiree::get_total()  {
     auto sum = [this](const double& accumulator, const Book& book){

@@ -8,9 +8,11 @@
 #include<iostream>
 #include <vector>
 #include <algorithm>
-#include "AuthorException.h"
+#include <AppException.h>
 
 class Author{
+/*    const int id;
+    static int id_max;*/
     std::string name;
     std::string gender;
     std::string nationality;
@@ -27,4 +29,5 @@ public:
     Author(const std::string& name, const std::string& gender, std::string& nationality);
 };
 
+//int Author::id_max = 1;
 #endif //MAIN_CPP_AUTHOR_H

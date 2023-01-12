@@ -5,9 +5,9 @@
 #ifndef MAIN_CPP_LIBRARY_H
 #define MAIN_CPP_LIBRARY_H
 
-#include "Book.h"
-#include "Client.h"
-#include "SortStrategy.h"
+#include <Book.h>
+#include <Client.h>
+#include <SortStrategy.h>
 #include <algorithm>
 
 template <typename T>
@@ -84,7 +84,7 @@ public:
 
     void set_sort_strategy(std::unique_ptr<SortStrategy> &&strategy);
 
-    double get_total_sales();
+    double get_total_sales() const;
 
     std::vector<Book> filter_by_genre(Genre genre) const;
 

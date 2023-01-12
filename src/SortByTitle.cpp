@@ -2,8 +2,8 @@
 // Created by Anca on 1/6/2023.
 //
 
-#include "../headers/SortByTitle.h"
-#include "algorithm"
+#include <SortByTitle.h>
+#include <algorithm>
 
 std::vector<Book> SortByTitle::sort(std::vector<Book> books) const {
     auto title_sort_fn = [](Book const& book1, Book const& book2) {

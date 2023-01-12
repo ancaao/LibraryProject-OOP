@@ -1,7 +1,7 @@
 //
 // Created by Anca on 11/27/2022.
 //
-#include "../headers/Publisher.h"
+#include <Publisher.h>
 
 std::string Publisher::getName() const { return name; }
 

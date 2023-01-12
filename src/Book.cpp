@@ -1,7 +1,7 @@
 //
 // Created by Anca on 11/27/2022.
 //
-#include "../headers/Book.h"
+#include <Book.h>
 
 std::string Book::getTitle() const { return title; }
 
@@ -10,6 +10,8 @@ Genre Book::getGenre() const { return genre; }
 double Book::getPrice() const { return price; }
 
 Publisher Book::getPublisher() const { return publisher; }
+
+//int Book::getYear() const { return year; }
 
 Book::Book(const std::string& title_, const Author& author_, const Publisher& publisher_,double price_,
      const Genre& genre_, int year_) : title{title_}, author{author_},

@@ -6,7 +6,7 @@
 #define MAIN_CPP_SORTSTRATEGY_H
 
 #include<iostream>
-#include "Book.h"
+#include <Book.h>
 
 class SortStrategy {
 public:
