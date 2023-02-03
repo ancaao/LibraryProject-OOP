@@ -3,8 +3,8 @@
 //
 #ifndef UNTITLED1_NGO_H
 #define UNTITLED1_NGO_H
-#include <Client.h>
-#include <Regular.h>
+#include "../headers/Client.h"
+#include "../headers/Regular.h"
 
 class NGO: public Client{
     int volunteers;

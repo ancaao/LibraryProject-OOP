@@ -5,8 +5,8 @@
 #ifndef MAIN_CPP_SORTBYTITLE_H
 #define MAIN_CPP_SORTBYTITLE_H
 
-#include <SortStrategy.h>
-#include <Book.h>
+#include "../headers/SortStrategy.h"
+#include "../headers/Book.h"
 
 class SortByTitle : public SortStrategy {
 public:

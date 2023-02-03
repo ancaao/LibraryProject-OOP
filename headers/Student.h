@@ -4,7 +4,7 @@
 
 #ifndef UNTITLED1_STUDENT_H
 #define UNTITLED1_STUDENT_H
-#include <Client.h>
+#include "../headers/Client.h"
 
 class Student: public Client{
 

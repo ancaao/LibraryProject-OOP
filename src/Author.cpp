@@ -2,7 +2,7 @@
 // Created by Anca on 11/27/2022.
 //
 
-#include <Author.h>
+#include "../headers/Author.h"
 
 std::ostream & operator<< (std::ostream& os, const Author& author) {
     os << "Name: " << author.name << ", gender: " << author.gender << ", nationality: " << author.nationality << "\n";
@@ -19,7 +19,6 @@ std::vector<Author> Author::get_authors_by_name(std::vector<Author> authors_list
 }
 
 Author::Author(const std::string& name, const std::string& gender, std::string& nationality): name(name), gender(gender), nationality(nationality){
-//    id_max++;
     if(gender != "male" && gender!= "female"){
         throw WrongGender();
     }

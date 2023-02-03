@@ -2,9 +2,9 @@
 // Created by Anca on 12/17/2022.
 //
 
-#include <AppException.h>
+#include "../headers/AppException.h"
 
-AppException::AppException(const std::string &arg) : runtime_error ("Author error: " + arg) {}
+AppException::AppException(const std::string &arg) : runtime_error ("Error: " + arg) {}
 
 WrongGender::WrongGender() : AppException("Author gender is not valid") {}
 

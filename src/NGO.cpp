@@ -1,8 +1,8 @@
 //
 // Created by Anca on 12/10/2022.
 //
-#include <NGO.h>
-#include <Regular.h>
+#include "../headers/NGO.h"
+#include "../headers/Regular.h"
 #include <numeric>
 
 NGO::NGO(const std::string& name, int volunteers): Client{name}, volunteers{volunteers} {}

@@ -5,9 +5,9 @@
 #ifndef MAIN_CPP_LIBRARY_H
 #define MAIN_CPP_LIBRARY_H
 
-#include <Book.h>
-#include <Client.h>
-#include <SortStrategy.h>
+#include "../headers/Book.h"
+#include "../headers/Client.h"
+#include "../headers/SortStrategy.h"
 #include <algorithm>
 
 template <typename T>

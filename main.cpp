@@ -1,17 +1,18 @@
 #include<fstream>
 #include<map>
 #include<string>
-#include<SortByTitle.h>
-#include<BookBuilder.h>
-#include<Author.h>
-#include<Publisher.h>
-#include<Book.h>
-#include<Library.h>
-#include<Student.h>
-#include<NGO.h>
-#include<Retiree.h>
-#include<AppException.h>
-#include<Regular.h>
+#include "headers/SortByTitle.h"
+#include "headers/BookBuilder.h"
+#include "headers/Author.h"
+#include "headers/Publisher.h"
+#include "headers/Book.h"
+#include "headers/Library.h"
+#include "headers/Student.h"
+#include "headers/NGO.h"
+#include "headers/Retiree.h"
+#include "headers/AppException.h"
+#include "headers/Regular.h"
+#include "headers/SortByYear.h"
 
 
 void read_Author(std::ifstream &fauthor, std::vector<Author> &authors){
@@ -110,12 +111,11 @@ void read_book(std::ifstream &fbook, std::vector<Book> &books, std::vector<Autho
             { return publisher_name == publisher.getName(); });
 
             try{
-                Book book(title, author, publisher, price, genre, year);
+                builder.addTitle(title).addAuthor(author).addYear(year).addPublisher(publisher).addPrice(price).addGenre(genre);
             } catch (AppException &error) {
                 std::cout << error.what() << '\n';
             }
 
-            builder.addTitle(title).addAuthor(author).addYear(year).addPublisher(publisher).addPrice(price).addGenre(genre);
             books.push_back(builder.build());
         }
     }
@@ -137,6 +137,8 @@ int main() {
     read_book(fbook, books, authors, publishers);
 
     Library<std::string> carturesti("Carturesti", books);
+    Library<std::u16string> libris(u"libris", books);
+//    std::cout << "LIBRIS"<< std::endl << libris << std::endl;
 
     Regular normal("Mihai");
     normal.add_to_cart(*carturesti.find("Ion"));
@@ -176,9 +178,9 @@ int main() {
     for (const Book& book: Fiction_books) std::cout << book <<"\n";
 
     carturesti.set_sort_strategy(std::make_unique<SortByTitle>());
+//    carturesti.set_sort_strategy(std::make_unique<SortByYear>());
 
     std::cout << "Toate cartile disponibile sunt: " << std::endl;
     std::cout << carturesti;
-
     return 0;
 }

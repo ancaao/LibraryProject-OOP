@@ -1,7 +1,7 @@
 //
 // Created by Anca on 12/9/2022.
 //
-#include <Student.h>
+#include "../headers/Student.h"
 #include <numeric>
 
 Student :: Student(const std::string& name) : Client{name} {}

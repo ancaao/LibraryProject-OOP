@@ -1,7 +1,7 @@
 //
 // Created by Anca on 12/19/2022.
 //
-#include <Regular.h>
+#include "../headers/Regular.h"
 #include<numeric>
 
 Regular::Regular(const std::string &name) : Client{name} {}

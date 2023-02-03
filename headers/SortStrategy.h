@@ -6,12 +6,12 @@
 #define MAIN_CPP_SORTSTRATEGY_H
 
 #include<iostream>
-#include <Book.h>
+#include "../headers/Book.h"
 
 class SortStrategy {
 public:
     SortStrategy() = default;
-    virtual ~SortStrategy() = 0;
+    virtual ~SortStrategy();
 
     virtual std::vector<Book> sort(std::vector<Book> books) const = 0;
 };

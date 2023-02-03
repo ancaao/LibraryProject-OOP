@@ -7,7 +7,7 @@
 
 #include<iostream>
 #include<vector>
-#include <Author.h>
+#include "../headers/Author.h"
 
 class Publisher{
     std::string name;

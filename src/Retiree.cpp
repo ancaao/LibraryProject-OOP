@@ -1,7 +1,7 @@
 //
 // Created by Anca on 12/10/2022.
 //
-#include <Retiree.h>
+#include "../headers/Retiree.h"
 #include <numeric>
 
 Retiree :: Retiree(const std::string& name) : Client{name} {}

@@ -1,7 +1,7 @@
 //
 // Created by Anca on 11/27/2022.
 //
-#include <Book.h>
+#include "../headers/Book.h"
 
 std::string Book::getTitle() const { return title; }
 
@@ -42,9 +42,9 @@ const Author &Book::getAuthor() const {
     return author;
 }
 
-/*int Book::getYear() const {
+int Book::getYear() const {
     return year;
-}*/
+}
 
 void Book::setTitle(const std::string &title_) {
     Book::title = title_;
@@ -63,9 +63,18 @@ void Book::setPrice(double price_) {
 }
 
 void Book::setGenre(Genre genre_) {
+    if(genre_ <= Genre::MIN || genre_ >= Genre::MAX)
+        throw WrongGenre();
     Book::genre = genre_;
 }
 
 void Book::setYear(int year_) {
+    time_t t = time(nullptr);
+    std::tm *const pTInfo = localtime(&t);
+    int CurrentYear = 1900 + pTInfo->tm_year;
+
+    if(year_ > CurrentYear)
+        throw WrongYear();
+
     Book::year = year_;
 }

@@ -1,10 +1,10 @@
 //
 // Created by Anca on 11/27/2022.
 //
-#include <Library.h>
-#include <Student.h>
-#include <NGO.h>
-#include <Retiree.h>
+#include "../headers/Library.h"
+#include "../headers/Student.h"
+#include "../headers/NGO.h"
+#include "../headers/Retiree.h"
 
 template <typename T>
 void Library<T>::add_client(const Client& client){
@@ -24,6 +24,11 @@ std::vector<Book> Library<T>::filter_by_genre(Genre genre) const {
     };
     copy_if(begin(books), end(books), std::back_inserter(new_books), genre_match_fn);
     return new_books;
+}
+
+std::ostream& operator<<(std::ostream& os, const std::u16string& st) {
+    for(const auto& ch : st) { os << static_cast<char>(ch); }
+    return os;
 }
 
 template <typename T>
@@ -71,5 +76,7 @@ template <typename T>
 Library<T>::Library(const T& name_, const std::vector<Book>& books_) : name{name_}, books{books_} {}
 
 template class Library<std::string>;
+template class Library<std::u16string>;
 
 template std::ostream& operator<< <>(std::ostream& os, const Library<std::string>& library);
+template std::ostream& operator<< <>(std::ostream& os, const Library<std::u16string>& library);

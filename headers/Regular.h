@@ -4,7 +4,7 @@
 
 #ifndef MAIN_CPP_REGULAR_H
 #define MAIN_CPP_REGULAR_H
-#include <Client.h>
+#include "../headers/Client.h"
 
 class Regular: public Client{
 public:
